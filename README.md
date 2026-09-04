@@ -1,27 +1,30 @@
 # freddie_prepayment
 Simple analysis of home loan payment records and prepayment records
 
-Prepayment and termination analysis of 2003 vintage from Freddie Mac's Single-Family
-Loan dataset, using PostgreSQL for data management and Python for modeling.
+Prepayment and termination analysis of 2003 vintage from Freddie Mac's Single-
+Family Loan dataset, using PostgreSQL for data management and Python for 
+modeling.
 
 ## Data
 Data for this mini-project are downloaded from Freddie Mac via the following:
 https://www.freddiemac.com/research/datasets/sf-loanlevel-dataset
-Details on data used to build the analysis:/
-Standard Dataset, Release 47 (July 2026 layout), vintage 2003Q1-Q2/
-** Later expansion might be added for more data, though personal storage is limited **
+
+Data used to build the analysis:\
+Standard Dataset, Release 47 (July 2026 layout), vintage 2003Q1-Q2\
+** Within the file structure 2003Q3-Q4 are also present, but not used in analysis 
+currently. Later expansion might be added, though storage is limited **
 
 The raw data used is not included in this repository to comply with Freddie Mac's terms 
 (non-commercial, research use permited, but license required for redistribution). Please
 download the necessary files in 'data/raw/'. 
 
-Field definitions, termination codes, and sentinel value handling are documented in [DATA_NOTES.md](DATA_NOTES.md).
+Field definitions, termination codes, and sentinel value handling are documented 
+in [DATA_NOTES.md](DATA_NOTES.md).
 
 ## Setup
 
 ## Repository Layout
 ```bash
-freddie_prepayment/
 ├── DATA_NOTES.md
 ├── README.md
 ├── analysis
