@@ -20,7 +20,7 @@ Field definitions, termination codes, and sentinel value handling are documented
 ## Setup
 
 ## Repository Layout
-'''bash
+```bash
 freddie_prepayment/
 ├── DATA_NOTES.md
 ├── README.md
@@ -55,4 +55,4 @@ freddie_prepayment/
 └── sql
     ├── 01_freddie_schema.sql
     └── 02_freddie_views.sql
-'''
+```
