@@ -31,3 +31,19 @@ LEFT JOIN (
     WHERE zero_balance_code IS NOT NULL
     ORDER BY loan_id, period_ym DESC
 ) t USING (loan_id);
+
+
+SELECT count(*) FROM loan_outcome;
+SELECT count(*) FROM orig;
+-- Verify the two numbers match
+
+SELECT count(*) FILTER (WHERE zero_balance_code IS NULL) AS still_active,
+       count(*) FILTER (WHERE zero_balance_code IS NOT NULL) AS terminated
+FROM loan_outcome;
+-- Verify that the number makes sense
+
+SELECT count(*) AS orphans
+FROM loan_outcome lo
+WHERE lo.zero_balance_code IS NULL
+  AND NOT EXISTS (SELECT 1 FROM perf p WHERE p.loan_id = lo.loan_id);
+-- Verify that orphans=0, no NULL from left join
