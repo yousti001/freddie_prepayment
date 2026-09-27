@@ -22,6 +22,18 @@ Field definitions, termination codes, and sentinel value handling are documented
 in [DATA_NOTES.md](DATA_NOTES.md).
 
 ## Setup
+1. Create the database:
+       createdb freddie
+2. Build the schema:
+       psql -d freddie -f sql/01_schema.sql
+3. Load the data files (see `sql/02_load.md`)
+4. Add keys and statistics:
+       psql -d freddie -f sql/03_keys_and_stats.sql
+5. Create the analysis views:
+       psql -d freddie -f sql/04_views.sql
+
+## Findings
+
 
 ## Repository Layout
 ```bash
