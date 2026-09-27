@@ -202,6 +202,23 @@ SELECT
     servicer_name
 FROM perf;
 
+-- Place a reminder to load data into tables before proceeding. 
+DO $$
+DECLARE
+    n_orig bigint;
+    n_perf bigint;
+BEGIN
+    SELECT count(*) INTO n_orig FROM orig;
+    SELECT count(*) INTO n_perf FROM perf;
+
+    IF n_orig = 0 AND n_perf = 0 THEN
+        RAISE NOTICE 'Schema created. Tables are EMPTY. Next steps:';
+        RAISE NOTICE 'Run the \copy & other commands in section 4 of this file, then run 02_freddie_views.sql';
+    ELSE
+        RAISE NOTICE 'Schema recreated. orig: % rows, perf: % rows', n_orig, n_perf;
+    END IF;
+END $$;
+
 
 -- ------------------------------------------------------------
 -- 4. LOADING  (run these in psql, NOT as part of \i)
@@ -213,7 +230,7 @@ FROM perf;
 --   FORMAT csv      avoids the backslash escaping that text
 --                   format applies inside seller/servicer names
 --   QUOTE E'\b'     disables quote handling; the files use none
---   NULL ''         turns empty fields into real NULLs
+--   NULL ''         turns empty fields into NULL values
 --
 -- \copy orig FROM 'C:/data/orig_2003Q1.txt' WITH (FORMAT csv, DELIMITER '|', QUOTE E'\b', NULL '')
 -- \copy perf FROM 'C:/data/perf_2003Q1.txt' WITH (FORMAT csv, DELIMITER '|', QUOTE E'\b', NULL '')
@@ -227,4 +244,9 @@ FROM perf;
 --   ***CREATE INDEX perf_loan_idx ON perf (loan_id);
 --   ANALYZE orig;
 --   ANALYZE perf;
+
+--   ***If necessary, drop keys before adding more data
+--      saves time as loading into unindexed table is faster***
+--   ***ALTER TABLE orig DROP CONSTRAINT orig_pkey;
+--   ***ALTER TABLE perf DROP CONSTRAINT perf_pkey;
 -- ------------------------------------------------------------
