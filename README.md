@@ -85,10 +85,11 @@ crunch. This pattern does not resemble a smooth seasoning ramp. Because a single
 confounds loan age with calendar date, the curve instead represents a neat record of
 the behavior of mortage rates through one cohort.
 
-![CPR and CDR over loan months, with green and red regions representing approximate time 
+![National 30 Year Loans, 2003 Q1 & Q2](https://github.com/yousti001/freddie_prepayment/blob/main/images/national_30yr_loans.png)
+
+CPR and CDR over loan months, with green and red regions representing approximate time 
 of 2008 and 2020 financial crisis, respectively. Plotted in gray is the average mortgage 
-rates over the same time, showing an inverse relationship to the CPR]
-(https://github.com/yousti001/freddie_prepayment/main/images/national_30yr_loans.png)
+rates over the same time, showing an inverse relationship to the CPR.
 
 **2. The credit gradient reverses between the two major refinancing waves.** In
 California's 2005 spike, the lowest-FICO band prepaid *fastest*, inverting the
@@ -96,21 +97,22 @@ usual pattern; in the 2011–13 wave, the highest-FICO bands lead. Rates were
 flucuating, but relatively steady, so it cannot be rate refinancing. Similar behavior
 can be observed in Florida, albeit less prominent, and even less in other states. 
 
-![CPR for the 5 largest represented states in this dataset, divided into different FICO bands. 
-The states are ordered from top to bottom in their percentage represented in this dataset.]
-(images/top_5_states_30yr_loans.png)
+![30 year loan performance for 5 most represented states](images/top_5_states_30yr_loans.png)
+
+CPR for the 5 largest represented states in this dataset, divided into different FICO bands. 
+The states are ordered from top to bottom in their percentage represented in this dataset.
 
 **3. California and Michigan diverge sharply in CPR and CDR.**
 During loan age 13–25, CA peaks near 40% CPR with a strong FICO gradient, while MI tops
 out near 20% with the bands nearly overlapping. Michigan's CDR runs roughly double California's 
 and begins rising around or prior to 2008 (depending on FICO band).
 
-![CPR and CDR for California. Note the early spikes in CPR on top.]
-(images/CA_CPR_CDR.png)
+![California CPR and CDR](images/CA_CPR_CDR.png)
+CPR and CDR for California. Note the early spikes in CPR on top.
 
-![CPR and CDR for Michigan. Note the much higher CDR rates, especially prominent 
-following 2008, while CPR reaches similar heights as California.]
-(images/MI_CPR_CDR.png)
+![Michigan CPR and CDR](images/MI_CPR_CDR.png)
+CPR and CDR for Michigan. Note the much higher CDR rates, especially prominent 
+following 2008, while CPR reaches similar heights as California.
 
 **4. Composition does not necessarily explain the differences.** California's FICO distribution
 is close to national (roughly 1, ignoring small number statistics at lower ends below 500), 
@@ -118,11 +120,11 @@ and its LTV distribution is skewed *lower*, not higher — the 90 and 95 LTV clu
 quarter to a third of their national share. Whatever drives the California spike in CPR
 is not simply due to a riskier pool.
 
-![Distribution of FICO scores nationally and in CA, and a comparison.]
-(images/national_vs_CA_FICO.png)
+![Comparison of FICO scores](images/national_vs_CA_FICO.png)
+Distribution of FICO scores nationally and in CA, and a comparison.
 
-![Distribution of LTV scores nationally and in CA.]
-(images/national_vs_CA_LTV.png)
+![Distribution of LTV scores](images/national_vs_CA_LTV.png)
+Distribution of LTV scores nationally and in CA.
 
 **5. Credit events lag defaults by 3–4 years.** Terminations coded as short sale or
 REO disposition peak at loan ages 110–140 (2012–2014), well after the 2009–10
@@ -157,27 +159,28 @@ increased (and likely their FICO scores increased), they are able to get better 
 opportunity. How soon that occurs, as someone who has never bought a house, I don't have a great idea. But this
 is currently my working hypothesis. 
 
-![CPR for California loans, divided by FICO and LTV bands.]
-(images/CA_CPR_FICO_LTV_bands.png)
+![CPR for California loans, divided by FICO and LTV bands.](images/CA_CPR_FICO_LTV_bands.png)
+CPR for California loans, divided by FICO and LTV bands. Note that the higher LTV bands had higher CPR through
+this period, which only covers months prior to 2008. 
 
 This appears to make make sense with the interest band information as well. Those with higher interest tend
 to be more likely to refinance, and as shown below the higher interest borrowers financed the most in this
 period. It also does appear that CA has more higher LTV loans with high interest, though the statistical 
 significance of this would require further investigation. 
 
-![CPR for California loans, divided by FICO and interest rate bands.]
-(images/CA_CPR_FICO_interest_bands.png)
+![CPR for California loans, divided by FICO and interest rate bands.](images/CA_CPR_FICO_interest_bands.png)
+CPR for California loans, divided by FICO and interest rate bands. 
 
-![Distribution of interest rates across different LTV bands for loans nationally and in CA.]
-(images/national_CA_LTV_v_interest.png)
+![Interest rates across different LTV bands](images/national_CA_LTV_v_interest.png)
+Distribution of interest rates across different LTV bands for loans nationally and in CA.
 
 I took some further looks into the UPB bands, and the CPR stays very consistent across the different bands, 
 indicating to me that the loan amount is not a factor. One possible problem here is that the bands are determined
 using national values, not California values, but even so there should be some noticeable differences if it is a
 significant factor. 
 
-![CPR for California loans, divided by FICO and UPB bands.]
-(images/CA_CPR_FICO_UPB_bands.png)
+![CPR for California loans, divided by FICO and UPB bands.](images/CA_CPR_FICO_UPB_bands.png)
+CPR for California loans, divided by individual FICO and UPB bands.
 
 Overall, it would appear that the prepayment history of loans from the early 2000's are dominated by the financial
 opportunities borrowers experienced if they survived the major financial events in 2008, and less extent 2020. By
