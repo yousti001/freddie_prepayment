@@ -108,9 +108,11 @@ out near 20% with the bands nearly overlapping. Michigan's CDR runs roughly doub
 and begins rising around or prior to 2008 (depending on FICO band).
 
 ![California CPR and CDR](images/CA_CPR_CDR.png)
+
 CPR and CDR for California. Note the early spikes in CPR on top.
 
 ![Michigan CPR and CDR](images/MI_CPR_CDR.png)
+
 CPR and CDR for Michigan. Note the much higher CDR rates, especially prominent 
 following 2008, while CPR reaches similar heights as California.
 
@@ -121,9 +123,11 @@ quarter to a third of their national share. Whatever drives the California spike
 is not simply due to a riskier pool.
 
 ![Comparison of FICO scores](images/national_vs_CA_FICO.png)
+
 Distribution of FICO scores nationally and in CA, and a comparison.
 
 ![Distribution of LTV scores](images/national_vs_CA_LTV.png)
+
 Distribution of LTV scores nationally and in CA.
 
 **5. Credit events lag defaults by 3–4 years.** Terminations coded as short sale or
@@ -160,6 +164,7 @@ opportunity. How soon that occurs, as someone who has never bought a house, I do
 is currently my working hypothesis. 
 
 ![CPR for California loans, divided by FICO and LTV bands.](images/CA_CPR_FICO_LTV_bands.png)
+
 CPR for California loans, divided by FICO and LTV bands. Note that the higher LTV bands had higher CPR through
 this period, which only covers months prior to 2008. 
 
@@ -169,9 +174,11 @@ period. It also does appear that CA has more higher LTV loans with high interest
 significance of this would require further investigation. 
 
 ![CPR for California loans, divided by FICO and interest rate bands.](images/CA_CPR_FICO_interest_bands.png)
+
 CPR for California loans, divided by FICO and interest rate bands. 
 
 ![Interest rates across different LTV bands](images/national_CA_LTV_v_interest.png)
+
 Distribution of interest rates across different LTV bands for loans nationally and in CA.
 
 I took some further looks into the UPB bands, and the CPR stays very consistent across the different bands, 
@@ -180,6 +187,7 @@ using national values, not California values, but even so there should be some n
 significant factor. 
 
 ![CPR for California loans, divided by FICO and UPB bands.](images/CA_CPR_FICO_UPB_bands.png)
+
 CPR for California loans, divided by individual FICO and UPB bands.
 
 Overall, it would appear that the prepayment history of loans from the early 2000's are dominated by the financial
