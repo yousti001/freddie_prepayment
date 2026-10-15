@@ -88,7 +88,7 @@ the behavior of mortage rates through one cohort.
 ![CPR and CDR over loan months, with green and red regions representing approximate time 
 of 2008 and 2020 financial crisis, respectively. Plotted in gray is the average mortgage 
 rates over the same time, showing an inverse relationship to the CPR]
-(images/national_30yr_loans.png)
+(https://github.com/yousti001/freddie_prepayment/main/images/national_30yr_loans.png)
 
 **2. The credit gradient reverses between the two major refinancing waves.** In
 California's 2005 spike, the lowest-FICO band prepaid *fastest*, inverting the
