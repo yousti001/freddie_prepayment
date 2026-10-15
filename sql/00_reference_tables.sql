@@ -82,3 +82,9 @@ INSERT INTO state_region (property_state, state_name, census_division, census_re
     ('WI','Wisconsin','East North Central','Midwest',true),
     ('WV','West Virginia','South Atlantic','South',false),
     ('WY','Wyoming','Mountain','West',false);
+
+
+CREATE TABLE pmms (
+    period_ym   integer PRIMARY KEY,
+    rate_30yr   numeric(6,3)
+);
