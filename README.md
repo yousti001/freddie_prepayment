@@ -15,8 +15,8 @@ Standard Dataset, Release 47 (July 2026 layout), vintage 2003Q1-Q2\
 currently. Later expansion might be added, though storage is limited **
 
 The raw data used is not included in this repository to comply with Freddie Mac's terms 
-(non-commercial, research use permited, but license required for redistribution). Please
-download the necessary files in 'data/raw/'. 
+(non-commercial, research use permitted, but license required for redistribution). Please
+download the necessary files in 'data/raw/' (See file structure at end of this file)
 
 Field definitions, termination codes, and sentinel value handling are documented 
 in [DATA_NOTES.md](DATA_NOTES.md).
@@ -43,7 +43,11 @@ in [DATA_NOTES.md](DATA_NOTES.md).
        psql -d freddie -f sql/03_build_prepay_aggregate.sql
        psql -d freddie -f sql/04_freddie_build_extra_agg.sql
 
-5. *Optional* build the following tables and views:
+5. Create .env file:
+
+       Use the .env.example file to create an .env file to utilize in Python analysis. 
+
+6. *Optional* build the following tables and views:
 
        psql -d freddie -f sql/00_reference_tables.sql
        psql -d freddie -f sql/02_freddie_views.sql
@@ -53,19 +57,19 @@ in [DATA_NOTES.md](DATA_NOTES.md).
 
 ## Methods
 1. CPR calculation - I utilized a loan-count CPR rather than balance-weighted, because the loan-count values are 
-readily available calculation that is cleaner, more condusive to this learning excercise, and significantly less 
+readily available calculation that is cleaner, more conducive to this learning exercise, and significantly less 
 expensive in terms of computation resources. NOTE: for SMM, it is important to keep counts of exposure and 
 prepayments, and do the division for the SMM once the summation for various bands is completed, and not sum the SMM. 
 
 2. Because of the grain size I selected, especially when analyzing individual states, certain loan month meeting
-various criteria may have small exposure sizes that induce small number statistics. Whenever possible, I try to 
+various criteria may have small exposure sizes that induce small number statistics. Whenever possible, I try to keep
 the exposure floor at 1000 to avoid that problem. However, in certain cases, I lower that to 500 to get data to 
 look for patterns, and thus a more encompassing picture of what is happening.
 
 3. Various band boundaries and their selection: 
        - FICO: 660, 700, 740, 780, based on industry conventions, and with initial cutoff at 660 to separate out the
        subprime lenders. 
-       - LTV: used 60, 70, 75, 80, and 90 as the cutoff values. Based on spikes in the datawhere larger number of loans
+       - LTV: used 60, 70, 75, 80, and 90 as the cutoff values. Based on spikes in the data where larger number of loans
        have those LTV's. Verified both nationally and for a few individual states (with higher proportions of loans, see
        analysis/01_analysis.ipynb)
        - Original UPB and interest rates: these were selected based on the 10, 25, 50, 75, and 90th percentiles 
@@ -83,9 +87,9 @@ for a single vintage shows several distinct surges (early 2003–04, 2009–10, 
 large hump through 2011–13, and 2021) separated by a trough during the 2008 credit
 crunch. This pattern does not resemble a smooth seasoning ramp. Because a single vintage
 confounds loan age with calendar date, the curve instead represents a neat record of
-the behavior of mortage rates through one cohort.
+the behavior of mortgage rates through one cohort.
 
-![National 30 Year Loans, 2003 Q1 & Q2](https://github.com/yousti001/freddie_prepayment/blob/main/images/national_30yr_loans.png)
+![National 30 Year Loans, 2003 Q1 & Q2](images/national_30yr_loans.png)
 
 CPR and CDR over loan months, with green and red regions representing approximate time 
 of 2008 and 2020 financial crisis, respectively. Plotted in gray is the average mortgage 
@@ -94,8 +98,10 @@ rates over the same time, showing an inverse relationship to the CPR.
 **2. The credit gradient reverses between the two major refinancing waves.** In
 California's 2005 spike, the lowest-FICO band prepaid *fastest*, inverting the
 usual pattern; in the 2011–13 wave, the highest-FICO bands lead. Rates were
-flucuating, but relatively steady, so it cannot be rate refinancing. Similar behavior
-can be observed in Florida, albeit less prominent, and even less in other states. 
+fluctuating, but relatively steady, so it is unlikely that rate related financing 
+was a major incentive, at least in the national rate environment independent of
+any other factors for each loan. Similar behavior can be observed in Florida, 
+albeit less prominent, and even less in other states. 
 
 ![30 year loan performance for 5 most represented states](images/top_5_states_30yr_loans.png)
 
@@ -130,20 +136,21 @@ Distribution of FICO scores nationally and in CA, and a comparison.
 
 Distribution of LTV scores nationally and in CA.
 
-**5. Credit events lag defaults by 3–4 years.** Terminations coded as short sale or
-REO disposition peak at loan ages 110–140 (2012–2014), well after the 2009–10
-delinquency peak — the foreclosure pipeline, extended by the 2010–12 foreclosure
-moratoria.
+**5. Credit events lag default times.** Terminations coded as short sale or
+REO disposition peak at loan ages 110–140 (2012–2014), which appears to be
+after delinquency peaks earlier that set off and resulted from the recession. 
+This timeline is likely a result of procedural timelines and government interventions
+following the recession.
 
 ### Details
 
-When examining the 30 year loans, the CPR is closely tied to the inverse of the national average mortage 
-rates instead of the age of the loans. The national CPR had two spikes, one tied to the rate dops following 
+When examining the 30 year loans, the CPR is closely tied to the inverse of the national average mortgage 
+rates instead of the age of the loans. The national CPR had two spikes, one tied to the rate drops following 
 2008, and one tied to the rate drops early in the 2020 COVID response. While I am not sure how surprising 
 this conclusion is, it does help to demonstrate that the 2008 financial crisis provided some opportunities 
 for home buyers who were prepared, and for financial institutes, further risks beyond the crisis itself. 
 
-An interesting aspected that I noticed was the heightened CPR early on in the loan ages. These high CPR 
+An interesting aspect that I noticed was the heightened CPR early on in the loan ages. These high CPR 
 appear to be dominated by lower FICO score borrowers, and dominated by California loans. In fact, I first 
 spotted this pattern when looking at the California data, and where the peaks rivaled that of the later 
 heights following the 2008 events, and only then noticed this on the national data. Upon this, I looked at
@@ -153,15 +160,14 @@ entirely explained by differences in loan composition, such as different distrib
 I am not entirely able to decipher why this pattern occurs, and can only hazard a guess. Given this is 
 happening in California, and to some extent in Florida, this could be related to rising house prices in these
 regions. Based on my previous knowledge, this time period saw significant increase in home prices in both 
-of these states, though for slightly different reasons. With the increased upderlying prices, recent home 
+of these states, though for slightly different reasons. With the increased underlying prices, recent home 
 buyers are able to secure better loans and rates and refinance their recent purchase. Since these are price
 increases following the initial loan, this does not influence the initial LTV distribution. However, when 
 looking at CPR divided by both FICO and LTV, we see that the highest CPR during this period are for low FICO 
-scores, and high LTV. To my (not too expert) eyes, this means that these refinanced loans are dominated by 
-buyers who had to finance a larger portion of their purchase, but did not have great FICO scores. As home prices
-increased (and likely their FICO scores increased), they are able to get better financing options, and took that
-opportunity. How soon that occurs, as someone who has never bought a house, I don't have a great idea. But this
-is currently my working hypothesis. 
+scores, and high LTV. In my opinion, this means that these refinanced loans are dominated by buyers who had to 
+finance a larger portion of their purchase, but did not have great FICO scores. As home prices increased (and 
+likely their FICO scores increased), they are able to get better financing options, and took that opportunity. 
+How soon that occurs is not something I have a pulse on, but this is currently my working hypothesis. 
 
 ![CPR for California loans, divided by FICO and LTV bands.](images/CA_CPR_FICO_LTV_bands.png)
 
@@ -194,25 +200,23 @@ Overall, it would appear that the prepayment history of loans from the early 200
 opportunities borrowers experienced if they survived the major financial events in 2008, and less extent 2020. By
 the time the 2020 COVID events took place, most of the borrowers are likely well established financially, and thus
 would be unlikely to either need refinance or have a credit event. However, following 2008, there were definitely 
-higher levels of credit events, especially noticeable in states like Michigan, where things are likely exasterbated 
+higher levels of credit events, especially noticeable in states like Michigan, where things are likely exasperated 
 by the problems the automobile industry experienced. However, for financial institutions, these events would appear 
 to present a double-whammy, first the initial problems that that the financial crisis creates, followed by the 
-refinancing that hurt the longer term abilities of the institutes. Of course, this is a rather simplified overview
-from someone who is a newcommer to this discipline, and I would welcome any feedback from more experienced 
-researchers into this topic. 
+refinancing that hurt the longer term abilities of the institutes. 
 
 Originally when picking this pack of loan vintage, I had expected to see more prominently the effects of the 
 2008 Financial Crisis. As a first time foray into this topic, I thought that this vintage would provide some
 more standard patterns, but close enough to the crisis to be really strongly affected by the events in 2008. 
-While there are definitely patterns tied to the Financial crisis, it appears more related to the mortage 
+While there are definitely patterns tied to the Financial crisis, it appears more related to the mortgage 
 rates changes in response to 2008, rather than the event itself. Of course, there is also significant delays
 in the processing of foreclosures and such that are beyond the scope of this project, and that I had not 
 initially realized, delaying the peaks of the CDR beyond 2009. Much of my hypothesis stated in the above are 
 based on rather basic history and understandings of the financial system and financial incentives of home buyers
 and financial institutes, and of the events that unfolded in the past few decades. For much of these events, while 
-I did live through them, I was not always aware of the full implications and impacts. Here, I am just presenting 
-some simple analysis and hypothesis, but will welcome any suggestions on further research that might prove 
-insightful. 
+I did live through them, I was not always aware of the full implications and impacts, and I am a rather newcomer
+to this discipline. Through this work, I hope to presenting some analysis and hypothesis while improving my skills, 
+and would welcome any suggestions on further research that might prove insightful. 
 
 
 ## Repository Layout
